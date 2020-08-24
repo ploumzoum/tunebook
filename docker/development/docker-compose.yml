@@ -1,8 +1,18 @@
 version: '3.5'
 
 services:
+  db:
+    container_name: tunebook-db
+    image: 'mongo'
+    volumes:
+      - tunebook_db_data_container:/data/db
+    networks:
+      - proxynet
+
   client:
     container_name: tunebook-app
+    stdin_open: true
+    tty: true
     build:
       context: ../../client
       dockerfile: Dockerfile
@@ -12,10 +22,41 @@ services:
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
+    ports:
+      - 3000:80
+    networks:
+      proxynet:
+  server:
+    container_name: tunebook
+    build:
+      context: ../../server
+      dockerfile: Dockerfile
+    volumes:
+      - '../../server:/usr/tunebook'
+      - '/usr/tunebook/node_modules'
+    ports:
+      - 3001:8000
     networks:
       proxynet:
 
 
+  admin-db:
+    container_name: tunebook-db-ui
+    image: mongo-express:latest
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=tunebook-db
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+    depends_on:
+      - db
+    networks:
+      - proxynet
+    ports:
+      - 3002:8081
+
 networks:
   proxynet:
     external: true
+
+volumes:
+  tunebook_db_data_container:
