@@ -10,7 +10,7 @@ require("mongoose").connect(Config.mongodb.uri, {
 	useUnifiedTopology: true,
 })
 
-// Start up server
+// Start up api
 const app = express()
 app.use(require("cors")({ maxAge: 30 * 60 }))
 app.use(require("morgan")("short"))

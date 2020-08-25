@@ -5,12 +5,12 @@
 module.exports = {
 	// clientUrl: "https://www.saig.org",
 
-	// mongodb: {
-	// 	uri: "mongodb://localhost/tunebook",
-	// },
+	mongodb: {
+		uri: "mongodb://tunebook-db/tunebook",
+	},
 
-	// listen: {
-	// 	port: 3001,
-	// 	host: "::1"
-	// },
+	listen: {
+		port: 3000,
+		host: "::"
+	},
 }

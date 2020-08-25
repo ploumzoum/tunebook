@@ -23,19 +23,21 @@ services:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
     ports:
-      - 3000:80
+      - 3001:80
     networks:
       proxynet:
-  server:
-    container_name: tunebook
+  api:
+    container_name: tunebook-api
+    depends_on:
+      - db
     build:
-      context: ../../server
+      context: ../../api
       dockerfile: Dockerfile
     volumes:
-      - '../../server:/usr/tunebook'
+      - '../../api:/usr/api'
       - '/usr/tunebook/node_modules'
     ports:
-      - 3001:8000
+      - 3002:3000
     networks:
       proxynet:
 
@@ -52,7 +54,7 @@ services:
     networks:
       - proxynet
     ports:
-      - 3002:8081
+      - 3003:8081
 
 networks:
   proxynet:
@@ -60,3 +62,4 @@ networks:
 
 volumes:
   tunebook_db_data_container:
+    external: true
