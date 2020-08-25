@@ -1,26 +1,21 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "tap test/**/*.test.js",
-    "start": "fastify start -l info -p 8000 app.js",
-    "dev": "fastify start -w -l info -p 8000 -P app.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "fastify": "^3.0.0",
-    "fastify-plugin": "^2.0.0",
-    "fastify-autoload": "^3.0.2",
-    "fastify-cli": "^2.2.0"
-  },
-  "devDependencies": {
-    "tap": "^14.0.0"
-  }
+	"name": "tunebook",
+	"version": "1.0.0",
+	"description": "Serveur API pour Tunebook",
+	"main": "index.js",
+	"author": "Elmussa",
+	"license": "GPLv3",
+	"private": true,
+	"dependencies": {
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"express-async-errors": "^3.1.1",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.9.7",
+		"morgan": "^1.10.0",
+		"uuid": "^7.0.3"
+	},
+	"scripts": {
+		"start": "node ."
+	}
 }
