@@ -22,8 +22,6 @@ type Inputs = {
 	abc: string
 }
 
-
-
 export default function TuneForm() {
 	const { register, handleSubmit, watch, errors } = useForm<Inputs>()
 	const context: FormContext = { errors, register }
@@ -37,16 +35,36 @@ export default function TuneForm() {
 						<form onSubmit={handleSubmit(onSubmit)}>
 							<Grid container spacing={2}>
 								<Grid item xs={6}>
-									<FormField label="Name" name="name" component={TextField} required/>
+									<FormField
+										label="Name"
+										name="name"
+										component={TextField}
+										required
+									/>
 								</Grid>
 								<Grid item xs={6}>
-									<FormField label="Composer" name="composer" component={TextField} required/>
+									<FormField
+										label="Composer"
+										name="composer"
+										component={TextField}
+										required
+									/>
 								</Grid>
 								<Grid item xs={6}>
-									<FormField label="Key" name="key" component={TextField} required/>
+									<FormField
+										label="Key"
+										name="key"
+										component={TextField}
+										required
+									/>
 								</Grid>
 								<Grid item xs={6}>
-									<FormField label="ABC" name="abc" component={TextField} required/>
+									<FormField
+										label="ABC"
+										name="abc"
+										component={TextField}
+										required
+									/>
 								</Grid>
 							</Grid>
 						</form>
@@ -75,12 +93,12 @@ type FieldProps = {
 }
 
 const FormField: FunctionComponent<FieldWrapperProps> = ({
-																													 label,
-																													 name,
-																													 component,
-																													 required,
-																													 errorText,
-																												 }) => {
+	label,
+	name,
+	component,
+	required,
+	errorText,
+}) => {
 	return (
 		<FormContext.Consumer>
 			{({ errors, register }) => {
@@ -89,7 +107,9 @@ const FormField: FunctionComponent<FieldWrapperProps> = ({
 					id: name,
 					error: errors && errors[name],
 					label,
-					inputProps: required ? { ref: register({ required: true }) } : undefined,
+					inputProps: required
+						? { ref: register({ required: true }) }
+						: undefined,
 					helperText: errorText,
 				}
 				return React.createElement<Partial<FieldProps>>(component, props)

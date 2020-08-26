@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 		link: {
 			marginLeft: 'auto',
 		},
-	}),
+	})
 )
 export default function Navbar() {
 	const trigger = useScrollTrigger()

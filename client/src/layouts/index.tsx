@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import Navbar from '../components/navbar'
 import { Container } from '@material-ui/core'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
@@ -8,19 +8,19 @@ type LayoutProps = {
 }
 
 const useStyles = makeStyles((theme: Theme) =>
- createStyles({
-	 container: {
-	 	paddingTop: theme.spacing(1),
-	 	paddingBottom: theme.spacing(1),
-	 }
- })
+	createStyles({
+		container: {
+			paddingTop: theme.spacing(1),
+			paddingBottom: theme.spacing(1),
+		},
+	})
 )
 
-export default function DefaultLayout({children}: LayoutProps) {
+export default function DefaultLayout({ children }: LayoutProps) {
 	const classes = useStyles()
 	return (
 		<>
-			<Navbar/>
+			<Navbar />
 			<Container maxWidth="lg" className={classes.container}>
 				{children}
 			</Container>
