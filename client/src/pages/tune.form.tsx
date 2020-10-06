@@ -3,11 +3,13 @@ import { useForm } from 'react-hook-form'
 import { TextField } from '@material-ui/core'
 import Navbar from '../components/navbar'
 import Container from '@material-ui/core/Container'
-import { FieldErrors } from 'react-hook-form/dist/types/form'
+import { FieldErrors } from 'react-hook-form/dist/types/errors'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import DefaultLayout from '../layouts'
+import {createTune} from "../api"
+
 export const FormContext = React.createContext<Partial<FormContext>>({})
 
 type FormContext = {
@@ -15,7 +17,7 @@ type FormContext = {
 	register: any
 }
 
-type Inputs = {
+export type Inputs = {
 	name: string
 	composer: string
 	type: string
@@ -26,7 +28,11 @@ type Inputs = {
 export default function TuneForm() {
 	const { register, handleSubmit, watch, errors } = useForm<Inputs>()
 	const context: FormContext = { errors, register }
-	const onSubmit = (data: Inputs) => console.log(data)
+	const onSubmit = (data: Inputs) => {
+		console.log("TUNE CREATION", data)
+		const result = createTune(data)
+		console.log("DONE !", result)
+	}
 
 	return (
 		<>

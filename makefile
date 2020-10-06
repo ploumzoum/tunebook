@@ -1,4 +1,4 @@
-.PHONY: dev bash-dev stop-dev rm-dev prod stop-prod rm-prod help
+.PHONY: dev build-dev bash-dev stop-dev rm-dev prod stop-prod rm-prod help
 .DEFAULT_GOAL: help
 
 default: help
@@ -13,6 +13,9 @@ bash-dev: ## Open a bash console into the dev container
 
 
 dev:  ## Run a development environment on port 80
+	@docker-compose -f docker/development/docker-compose.yml up -d
+
+build-dev:  ## Force building image and run a development environment on port 3001
 	@docker-compose -f docker/development/docker-compose.yml up --build -d
 
 stop-dev:  ## Stops the development environment on port 80
