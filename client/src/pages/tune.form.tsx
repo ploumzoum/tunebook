@@ -5,6 +5,7 @@ import Navbar from '../components/navbar'
 import Container from '@material-ui/core/Container'
 import { FieldErrors } from 'react-hook-form/dist/types/form'
 import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles'
 import DefaultLayout from '../layouts'
 export const FormContext = React.createContext<Partial<FormContext>>({})
@@ -26,7 +27,7 @@ export default function TuneForm() {
 	const { register, handleSubmit, watch, errors } = useForm<Inputs>()
 	const context: FormContext = { errors, register }
 	const onSubmit = (data: Inputs) => console.log(data)
-	console.log(watch('Add a tune'))
+
 	return (
 		<>
 			<DefaultLayout>
@@ -66,6 +67,10 @@ export default function TuneForm() {
 										required
 									/>
 								</Grid>
+								<Grid container justify="center" item xs={12}>
+									<Button variant="contained" color="primary" type="submit">Save</Button>
+								</Grid>
+								
 							</Grid>
 						</form>
 					</FormContext.Provider>
@@ -99,19 +104,21 @@ const FormField: FunctionComponent<FieldWrapperProps> = ({
 	required,
 	errorText,
 }) => {
+
 	return (
 		<FormContext.Consumer>
 			{({ errors, register }) => {
 				const props: FieldProps = {
 					name,
 					id: name,
-					error: errors && errors[name],
+					error: (errors && errors[name]) ? true : false,
 					label,
 					inputProps: required
 						? { ref: register({ required: true }) }
 						: undefined,
 					helperText: errorText,
 				}
+				console.log("errors", errors)
 				return React.createElement<Partial<FieldProps>>(component, props)
 			}}
 		</FormContext.Consumer>
