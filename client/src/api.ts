@@ -7,3 +7,4 @@ const client = axios.create({
 export async function createTune(data: Inputs) {
 	return await client.post('/tunes', data)
 }
+

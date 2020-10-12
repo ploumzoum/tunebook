@@ -13,7 +13,7 @@
     "@types/uuid": "^8.3.0",
     "axios": "^0.20.0",
     "fontsource-roboto": "^3.0.3",
-    "mobx": "^5.15.6",
+    "mobx": "^6.0.1",
     "mobx-react-lite": "^2.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
