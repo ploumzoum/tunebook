@@ -3,11 +3,9 @@ version: '3.5'
 services:
   db:
     container_name: tunebook-db
-    image: 'mongo'
-    volumes:
-      - tunebook_db_data_container:/data/db
+    image: 'mongo:latest'
     networks:
-      - proxynet
+      tunebook-net:
 
   client:
     container_name: tunebook-app
@@ -22,10 +20,11 @@ services:
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
+      - WAIT_HOSTS=db:27017
     ports:
       - 3001:80
     networks:
-      proxynet:
+      tunebook-net:
   api:
     container_name: tunebook-api
     depends_on:
@@ -39,7 +38,7 @@ services:
     ports:
       - 3002:3000
     networks:
-      proxynet:
+      tunebook-net:
 
 
   admin-db:
@@ -52,14 +51,10 @@ services:
     depends_on:
       - db
     networks:
-      - proxynet
+      tunebook-net:
     ports:
       - 3003:8081
 
 networks:
-  proxynet:
-    external: true
+  tunebook-net:
 
-volumes:
-  tunebook_db_data_container:
-    external: true

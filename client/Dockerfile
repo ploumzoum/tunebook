@@ -9,6 +9,8 @@ ENV PATH ./node_modules/.bin:$PATH
 # install app dependencies
 COPY package.json yarn.lock ./
 RUN yarn install
-
+# Add the wait script to the image
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait ./wait
+RUN chmod +x ./wait
 EXPOSE 80
-CMD ["yarn", "start"]
+CMD ./wait && yarn start
