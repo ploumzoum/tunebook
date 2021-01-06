@@ -3,7 +3,7 @@
 ## How to run the whole thing
 `make dev` to run backend, db, app and db administration in a development environment
 
-## How to access to the things
+## How to access the things
 - App: 3001
 - Backend: 3002
 - DB: 3003
