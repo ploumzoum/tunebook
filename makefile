@@ -8,9 +8,13 @@ help: ## Output available commands
 	@echo
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
-bash-dev: ## Open a bash console into the dev container
-	@docker exec -ti riisq.test bash
+bash-app: ## Open a bash console into the dev container
+	@docker exec -ti tunebook-app bash
 
+rebuid-app:
+	@docker stop tunebook-app
+	@docker rm tunebook-app
+	@docker-compose -f docker/development/docker-compose.yml up -d --build client 
 
 dev:  ## Run a development environment on port 80
 	@docker-compose -f docker/development/docker-compose.yml up -d

@@ -1,15 +1,14 @@
 # TUNEBOOK
 
 ## How to run the whole thing
+
 `make dev` to run backend, db, app and db administration in a development environment
 
 ## How to access the things
-- App: 3001
-- Backend: 3002
-- DB: 3003
 
-
-
+- App: 3000
+- Backend: 3001
+- DB-Admin: 3002
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

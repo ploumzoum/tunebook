@@ -1,0 +1,69 @@
+.btn {
+  border-radius: 2px;
+  height: 40px;
+  padding: 8px 16px;
+  cursor: pointer;
+  align-items: center;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.btn-primary {
+  @extend .btn;
+  color: map-get($colors, 'primary_reversed');
+  background-color: map-get($colors, 'action');
+  outline: 0;
+  border: none;
+  &:disabled {
+    color: map-get($colors, 'tertiary');
+    background-color: map-get($colors-background, 'hell');
+  }
+}
+
+.btn-primary-small {
+  @extend .btn-primary, .small-700;
+  color: map-get($colors, 'primary_reversed') !important;
+  padding: 4px 8px;
+  height: 24px;
+}
+
+.btn-primary-alert {
+  @extend .btn-primary;
+  background-color: map-get($colors, 'error');
+}
+
+.btn-disabled {
+  @extend .btn;
+  color: map-get($colors, 'tertiary');
+  background-color: map-get($colors-background, 'hell');
+  border: none;
+}
+.btn-disabled-small {
+  @extend .btn-disabled, .small-700;
+  padding: 4px 8px;
+  height: 24px;
+}
+
+.btn-secondary {
+  @extend .btn;
+  color: map-get($colors, 'action');
+  cursor: pointer;
+  background-color: map-get($colors-background, 'transparent');
+  border: 1px solid map-get($colors, 'stroke');
+  box-sizing: border-box;
+}
+
+.btn-secondary-alert {
+  @extend .btn-secondary;
+  color: map-get($colors, 'error');
+}
+
+.btn-icon {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}

@@ -1,0 +1,19 @@
+#home {
+  display: flex;
+  height: 100vh;
+  background-color: red;
+  .navigation {
+    background-color: white;
+    width: 200px;
+    border-right: 1px solid black;
+  }
+
+  .content {
+    flex: 1;
+    background-color: white;
+  }
+  .tune-row {
+    display: flex;
+    cursor: pointer;
+  }
+}

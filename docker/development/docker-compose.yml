@@ -20,9 +20,8 @@ services:
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
-      - WAIT_HOSTS=db:27017
     ports:
-      - 3001:80
+      - 3000:3000
     networks:
       tunebook-net:
   api:
@@ -32,14 +31,14 @@ services:
     build:
       context: ../../api
       dockerfile: Dockerfile
+    command: sh -c 'node .'
     volumes:
       - '../../api:/usr/api'
       - '/usr/tunebook/node_modules'
     ports:
-      - 3002:3000
+      - 3001:3000
     networks:
       tunebook-net:
-
 
   admin-db:
     container_name: tunebook-db-ui
@@ -53,8 +52,7 @@ services:
     networks:
       tunebook-net:
     ports:
-      - 3003:8081
+      - 3002:8081
 
 networks:
   tunebook-net:
-

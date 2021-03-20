@@ -1,0 +1,124 @@
+.formInput {
+  margin-top: 8px;
+  > label {
+    @extend .medium-700;
+  }
+
+  > input,
+  select,
+  textarea {
+    @extend .medium-400;
+    margin-top: 8px;
+    width: 100%;
+    background: map-get($colors-background, 'ground');
+    border: 1px solid map-get($colors, 'stroke');
+    border-radius: 2px;
+    padding: 8px;
+  }
+  > textarea {
+    max-width: 464px;
+  }
+
+  > a {
+    @extend .small-700;
+    color: map-get($colors, 'action');
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  .doubleInput {
+    display: flex;
+    flex-direction: column;
+    :last-child {
+      margin-top: 32px;
+    }
+    > input {
+      @extend .medium-400;
+      margin-top: 8px;
+      height: 40px;
+      width: 100%;
+      background: map-get($colors-background, 'ground');
+      border: 1px solid map-get($colors, 'stroke');
+      border-radius: 2px;
+      padding: 8px;
+    }
+  }
+
+  .radioGroup {
+    display: flex;
+    flex-direction: column;
+    padding-top: 8px;
+    label {
+      @extend .medium-400;
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    input {
+      margin-right: 19px;
+    }
+  }
+  .hint {
+    @extend .small-400;
+    color: map-get($colors, 'secondary');
+    margin-top: 8px;
+  }
+  a {
+    @extend .small-700;
+  }
+  .filePicker {
+    border-style: dashed;
+  }
+}
+
+.checkbox {
+  cursor: pointer;
+  input {
+    display: none;
+  }
+  display: flex;
+  align-items: center;
+  .square {
+    flex-shrink: 0;
+    height: 18px;
+    width: 18px;
+    background: rgba(255, 255, 255, 0.01);
+
+    border: 1px solid #dcdfe1;
+    box-sizing: border-box;
+    border-radius: 2px;
+  }
+  span {
+    @extend .medium-400;
+    margin-left: 19px;
+  }
+  .checked {
+    background: map-get($colors, 'action');
+    display: flex;
+    border-style: none;
+    justify-content: center;
+    align-items: center;
+  }
+  .disabled {
+    background: #dcdfe1;
+  }
+}
+.checkbox.disabled {
+  cursor: auto;
+}
+
+.formInput.error {
+  input,
+  .checkbox .square {
+    border: 1px solid #ac1616;
+  }
+  p.error {
+    @extend .small-400;
+    color: #ac1616;
+    a {
+      @extend .small-700;
+      color: #ac1616;
+    }
+  }
+}

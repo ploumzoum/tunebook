@@ -1,0 +1,66 @@
+// Color system
+$colors: (
+  'action': #2da84f,
+  'error': #ac1616,
+  'danger': #d1180c,
+  'pochette': #f5752c,
+  'primary': #203548,
+  'primary_reversed': #ffffff,
+  'secondary': #687a8b,
+  'tertiary': #8da0b2,
+  'stroke': #dcdfe1,
+  'inactive': #8da0b3,
+  'alert_warning': #a55108,
+  'alert_positive': #dff8e3,
+  'wip': #d6c4a2
+);
+
+$colors-secondary: (
+  'purple': #bcbbf2,
+  'scarlett': #d9acf7,
+  'pink': #ebb1dc,
+  'salmon': #ffafa8,
+  'coral': #fcb8c5,
+  'peach': #fac0ae,
+  'orange': #ffd0a9,
+  'yellow': #f8eba3,
+  'olive': #c6d9ad,
+  'green': #c6f3b6,
+  'teal': #93e9e4,
+  'skyblue': #91ddfe,
+  'indigo': #a4b7f1
+);
+$colors-background: (
+  'transparent': #ffffff,
+  'ground': #ffffff,
+  'underground': #faf8f9,
+  'hell': #f2eff0,
+  'underground_reversed': #322129,
+  'underground_reversed2': #3f2933
+);
+
+// Metric system
+$sizes: (
+  'huge': 128px,
+  'cover': 100px,
+  'xlarge': 72px,
+  'large': 56px,
+  'medium': 40px,
+  'small': 24px,
+  'xsmall': 16px,
+  'tiny': 8px,
+  'xtiny': 4px
+);
+
+$spacings: (
+  'xlarge': 64px,
+  'large': 32px,
+  'medium': 16px,
+  'small': 8px,
+  'tiny': 4px,
+  'xtiny': 2px,
+  'hairline': 1px
+);
+
+$border-radius-form: 2px;
+$border-radius-modal: 4px;

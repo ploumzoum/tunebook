@@ -1,0 +1,62 @@
+.small {
+  color: map-get($colors, 'primary');
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.small-400 {
+  @extend .small;
+  font-weight: normal;
+}
+
+.small-700 {
+  @extend .small;
+  font-weight: bold;
+}
+
+.medium {
+  color: map-get($colors, 'primary');
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+}
+.medium-400 {
+  @extend .medium;
+  font-weight: normal;
+}
+.medium-700 {
+  @extend .medium;
+  font-weight: bold;
+}
+
+h1 {
+  color: map-get($colors, 'primary');
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+h2 {
+  color: map-get($colors, 'primary');
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+h4 {
+  color: map-get($colors, 'primary');
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+h5 {
+  color: map-get($colors, 'primary');
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 24px;
+}
