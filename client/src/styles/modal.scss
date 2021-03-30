@@ -1,0 +1,60 @@
+.modal-background {
+  background-color: rgba(100, 100, 100, 0.5);
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .modal {
+    background-color: white;
+    max-height: 80vh;
+    max-width: 80vw;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+
+    .top-bar {
+      // width: 944px;
+      padding: 16px;
+      max-width: 80vw;
+      box-shadow: inset 0px -1px 0px #dcdfe1;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      // padding-left: 16px;
+      // padding-right: 16px;
+      .title {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        color: #203548;
+      }
+      .exit {
+        cursor: pointer;
+      }
+    }
+    .content {
+      padding: 32px;
+      overflow-y: auto;
+    }
+    .downBar {
+      height: 72px;
+      padding: 16px;
+      max-width: 80vw;
+      box-shadow: inset 0px 1px 0px #dcdfe1;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      // padding-left: 16px;
+      // padding-right: 16px;
+    }
+  }
+}

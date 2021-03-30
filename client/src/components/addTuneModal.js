@@ -1,74 +1,64 @@
-import { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import LeftArrow from '../svgs/arrow-left.js';
-import getTune from '../api/getTune';
-import patchTune from '../api/patchTune';
+import { useState } from 'react';
+import Modal from './modal';
+import FormInput from './form/formInput';
 import useForm from '../utils/useForm';
-import FormInput from '../components/form/formInput.js';
-
-export default function Tune(props) {
-  const history = useHistory();
-  const { tuneId } = useParams();
-  const [tune, setTune] = useState({});
-  const form = useForm(
-    {
-      title: {
-        value: '',
-        errors: [],
-        validators: ['required'],
-      },
-      type: {
-        value: '',
-        errors: [],
-        validators: ['required'],
-      },
-      key: {
-        value: '',
-        errors: [],
-        validators: ['required'],
-      },
-      composer: {
-        value: '',
-        errors: [],
-        validators: ['required'],
-      },
-      abc: {
-        value: '',
-        errors: [],
-        validators: ['required'],
-      },
-      note: {
-        value: '',
-        errors: [],
-      },
+import postTune from '../api/postTune';
+export default function AddTuneModal({ setShowModal }) {
+  const form = useForm({
+    title: {
+      value: '',
+      errors: [],
+      validators: ['required'],
     },
-    true,
-  );
+    type: {
+      value: '',
+      errors: [],
+      validators: ['required'],
+    },
+    key: {
+      value: '',
+      errors: [],
+      validators: ['required'],
+    },
+    composer: {
+      value: '',
+      errors: [],
+      validators: ['required'],
+    },
+    abc: {
+      value: '',
+      errors: [],
+      validators: ['required'],
+    },
+    note: {
+      value: '',
+      errors: [],
+    },
+  });
 
   const [triedSubmit, setTriedSubmit] = useState(false);
-  const updateTune = async () => {
+  const createTune = async () => {
     if (form.isValid()) {
-      await patchTune({ tuneId, ...form.toJS() });
-      form.cleanFields();
+      await postTune({ ...form.toJS() });
+      setShowModal(false);
     }
     setTriedSubmit(true);
   };
-  const refreshTune = async () => {
-    const tune = await getTune({ tuneId });
-    setTune(tune);
-  };
-  const handleOnClick = () => history.push('/');
-  useEffect(() => refreshTune(), []);
-  useEffect(() => {
-    form.loadFields(tune);
-  }, [tune]);
   return (
-    <main id="tune">
-      <div className="top-bar">
-        <div className="back-button" onClick={handleOnClick}>
-          <LeftArrow />
-        </div>
-      </div>
+    <Modal
+      title="Ajouter une tune"
+      setShowModal={setShowModal}
+      actions={() => (
+        <>
+          <button className="btn-secondary" onClick={() => setShowModal(false)}>
+            Annuler
+          </button>
+          <button onClick={createTune} className="btn-primary">
+            Soumettre
+          </button>
+        </>
+      )}
+    >
       <form>
         <FormInput errors={form.fields.title.errors} triedSubmit={triedSubmit}>
           <label htmlFor="title">Titre</label>
@@ -76,7 +66,6 @@ export default function Tune(props) {
             id="title"
             value={form.fields.title.value}
             onChange={form.handlers.title}
-            onBlur={updateTune}
           />
         </FormInput>
         <FormInput errors={form.fields.type.errors} triedSubmit={triedSubmit}>
@@ -85,7 +74,6 @@ export default function Tune(props) {
             id="type"
             value={form.fields.type.value}
             onChange={form.handlers.type}
-            onBlur={updateTune}
           />
         </FormInput>
         <FormInput errors={form.fields.abc.errors} triedSubmit={triedSubmit}>
@@ -94,7 +82,6 @@ export default function Tune(props) {
             id="abc"
             value={form.fields.abc.value}
             onChange={form.handlers.abc}
-            onBlur={updateTune}
           />
         </FormInput>
         <FormInput errors={form.fields.key.errors} triedSubmit={triedSubmit}>
@@ -103,7 +90,6 @@ export default function Tune(props) {
             id="key"
             value={form.fields.key.value}
             onChange={form.handlers.key}
-            onBlur={updateTune}
           />
         </FormInput>
         <FormInput
@@ -115,7 +101,6 @@ export default function Tune(props) {
             id="composer"
             value={form.fields.composer.value}
             onChange={form.handlers.composer}
-            onBlur={updateTune}
           />
         </FormInput>
         <FormInput errors={form.fields.note.errors} triedSubmit={triedSubmit}>
@@ -124,10 +109,9 @@ export default function Tune(props) {
             id="note"
             value={form.fields.note.value}
             onChange={form.handlers.note}
-            onBlur={updateTune}
           />
         </FormInput>
       </form>
-    </main>
+    </Modal>
   );
 }

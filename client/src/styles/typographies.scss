@@ -9,6 +9,11 @@
   font-weight: normal;
 }
 
+.small-400-secondary {
+  @extend .small-400;
+  color: map-get($colors, 'secondary');
+}
+
 .small-700 {
   @extend .small;
   font-weight: bold;
@@ -29,7 +34,7 @@
   font-weight: bold;
 }
 
-h1 {
+.heading-1 {
   color: map-get($colors, 'primary');
   font-style: normal;
   font-weight: bold;
@@ -37,15 +42,22 @@ h1 {
   line-height: 48px;
 }
 
-h2 {
+.heading-2 {
   color: map-get($colors, 'primary');
   font-style: normal;
   font-weight: bold;
   font-size: 32px;
   line-height: 40px;
 }
-
-h4 {
+.heading-3 {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.heading-4 {
   color: map-get($colors, 'primary');
   font-style: normal;
   font-weight: bold;
@@ -53,7 +65,7 @@ h4 {
   line-height: 24px;
 }
 
-h5 {
+.heading-5 {
   color: map-get($colors, 'primary');
   font-style: normal;
   font-weight: bold;

@@ -1,19 +1,47 @@
 #home {
   display: flex;
+  flex-direction: column;
   height: 100vh;
-  background-color: red;
+  background-color: white;
+  padding: 16px 32px;
+  .title-bar {
+    margin-top: 32px;
+    display: flex;
+    justify-content: space-between;
+  }
   .navigation {
     background-color: white;
     width: 200px;
     border-right: 1px solid black;
   }
 
-  .content {
-    flex: 1;
-    background-color: white;
+  .search-bar {
+    border: 1px solid #dcdfe1;
+    box-sizing: border-box;
+    border-radius: 25px;
+    padding: 8px;
+    width: 464px;
   }
-  .tune-row {
+
+  .tune-list {
     display: flex;
-    cursor: pointer;
+    flex-direction: column;
+    margin-top: 32px;
+
+    .tune-row {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 16px;
+      box-shadow: inset 0px 1px 0px #dcdfe1;
+      .title {
+        flex: 1;
+      }
+      .abc {
+        @extend .heading-3;
+        font-weight: normal !important;
+        flex: 1;
+      }
+    }
   }
 }

@@ -1,6 +1,17 @@
 @import './variables.scss';
 @import './typographies.scss';
 @import './buttons.scss';
+@import './modal.scss';
 @import './form.scss';
 @import './home.scss';
 @import './tune.scss';
+
+.justify-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.justify-space-between {
+  display: flex;
+  justify-content: space-between;
+}
