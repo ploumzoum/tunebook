@@ -20,6 +20,9 @@ async function routes(fastify, options) {
     url: "/tunes/:tuneId",
     schema: {
       description: "Get a tune by ID",
+      params: {
+        tuneId: { type: "string" },
+      },
       response: {
         200: TuneSchema.serialization.tune,
       },
@@ -70,6 +73,9 @@ async function routes(fastify, options) {
     url: "/tunes/:tuneId",
     schema: {
       description: "Patch a tune by ID",
+      params: {
+        tuneId: { type: "string" },
+      },
       body: TuneSchema.validation.createTune,
       response: {
         200: TuneSchema.serialization.tune,
@@ -83,6 +89,9 @@ async function routes(fastify, options) {
     url: "/tunes/:tuneId",
     schema: {
       description: "Delete a tune by ID",
+      params: {
+        tuneId: { type: "string" },
+      },
       response: {
         204: {},
       },
@@ -96,7 +105,9 @@ const getAllTunes = async function (req, res) {
 };
 
 const getTuneById = async function (req, res) {
-  return await await Tune.findById(req.params.tuneId);
+  const tune = await Tune.findById(req.params.tuneId);
+  if (!tune) throw Errors.TuneNotFound;
+  return tune;
 };
 
 const getTunes = async function (req, res) {

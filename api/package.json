@@ -10,6 +10,7 @@
     "fastify": "^3.3.0",
     "fastify-cors": "^4.1.0",
     "fastify-formbody": "^4.0.3",
+    "fastify-multipart": "^3.3.1",
     "http-errors": "^1.8.0",
     "mongoose": "^5.9.7",
     "prettier": "^2.0.5",

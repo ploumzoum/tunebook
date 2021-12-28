@@ -191,6 +191,13 @@
   "resolved" "https://registry.npmjs.org/bson/-/bson-1.1.5.tgz"
   "version" "1.1.5"
 
+"busboy@^0.3.1":
+  "integrity" "sha512-y7tTxhGKXcyBxRKAni+awqx8uqaJKrSFSNFSeRG5CsWNdmy2BIK+6VGWEW7TZnIO/533mtMEA4rOevQV815YJw=="
+  "resolved" "https://registry.npmjs.org/busboy/-/busboy-0.3.1.tgz"
+  "version" "0.3.1"
+  dependencies:
+    "dicer" "0.3.0"
+
 "call-bind@^1.0.0":
   "integrity" "sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA=="
   "resolved" "https://registry.npmjs.org/call-bind/-/call-bind-1.0.2.tgz"
@@ -303,6 +310,13 @@
   "resolved" "https://registry.npmjs.org/depd/-/depd-1.1.2.tgz"
   "version" "1.1.2"
 
+"dicer@0.3.0":
+  "integrity" "sha512-MdceRRWqltEG2dZqO769g27N/3PXfcKl04VhYnBlo2YhH7zPi88VebsjTKclaOyiuMaGU72hTfw3VkUitGcVCA=="
+  "resolved" "https://registry.npmjs.org/dicer/-/dicer-0.3.0.tgz"
+  "version" "0.3.0"
+  dependencies:
+    "streamsearch" "0.1.2"
+
 "doctrine@^3.0.0":
   "integrity" "sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w=="
   "resolved" "https://registry.npmjs.org/doctrine/-/doctrine-3.0.0.tgz"
@@ -314,6 +328,13 @@
   "integrity" "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A=="
   "resolved" "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz"
   "version" "8.0.0"
+
+"end-of-stream@^1.4.4":
+  "integrity" "sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q=="
+  "resolved" "https://registry.npmjs.org/end-of-stream/-/end-of-stream-1.4.4.tgz"
+  "version" "1.4.4"
+  dependencies:
+    "once" "^1.4.0"
 
 "enquirer@^2.3.5":
   "integrity" "sha512-yjNnPr315/FjS4zIsUxYguYUPP2e1NK4d7E7ZOLiyYCcbFBiTMyID+2wvm2w6+pZ/odMA7cRkjhsPbltwBOrLg=="
@@ -504,6 +525,11 @@
     "fastify-plugin" "^2.0.0"
     "vary" "^1.1.2"
 
+"fastify-error@^0.2.0":
+  "integrity" "sha512-zabxsBatj59ROG0fhP36zNdc5Q1/eYeH9oSF9uvfrurZf8/JKfrJbMcIGrLpLWcf89rS6L91RHWm20A/X85hcA=="
+  "resolved" "https://registry.npmjs.org/fastify-error/-/fastify-error-0.2.0.tgz"
+  "version" "0.2.0"
+
 "fastify-error@^0.3.0":
   "integrity" "sha512-oCfpcsDndgnDVgiI7bwFKAun2dO+4h84vBlkWsWnz/OUK9Reff5UFoFl241xTiLeHWX/vU9zkDVXqYUxjOwHcQ=="
   "resolved" "https://registry.npmjs.org/fastify-error/-/fastify-error-0.3.1.tgz"
@@ -517,12 +543,30 @@
     "fastify-plugin" "^2.0.0"
     "qs" "^6.5.1"
 
+"fastify-multipart@^3.3.1":
+  "integrity" "sha512-66fwP97W5eihJGoYJisoJ+K7Mk7Fj0YYsdTLdESefVfi78C2FwbDQcYE4JWH27ucCpLvd199KUpClhQsWD8Dbg=="
+  "resolved" "https://registry.npmjs.org/fastify-multipart/-/fastify-multipart-3.3.1.tgz"
+  "version" "3.3.1"
+  dependencies:
+    "busboy" "^0.3.1"
+    "deepmerge" "^4.2.2"
+    "end-of-stream" "^1.4.4"
+    "fastify-error" "^0.2.0"
+    "fastify-plugin" "^3.0.0"
+    "hexoid" "^1.0.0"
+    "stream-wormhole" "^1.1.0"
+
 "fastify-plugin@^2.0.0":
   "integrity" "sha512-I+Oaj6p9oiRozbam30sh39BiuiqBda7yK2nmSPVwDCfIBlKnT8YB3MY+pRQc2Fcd07bf6KPGklHJaQ2Qu81TYQ=="
   "resolved" "https://registry.npmjs.org/fastify-plugin/-/fastify-plugin-2.3.4.tgz"
   "version" "2.3.4"
   dependencies:
     "semver" "^7.3.2"
+
+"fastify-plugin@^3.0.0":
+  "integrity" "sha512-ZdCvKEEd92DNLps5n0v231Bha8bkz1DjnPP/aEz37rz/q42Z5JVLmgnqR4DYuNn3NXAO3IDCPyRvgvxtJ4Ym4w=="
+  "resolved" "https://registry.npmjs.org/fastify-plugin/-/fastify-plugin-3.0.0.tgz"
+  "version" "3.0.0"
 
 "fastify-warning@^0.2.0":
   "integrity" "sha512-s1EQguBw/9qtc1p/WTY4eq9WMRIACkj+HTcOIK1in4MV5aFaQC9ZCIt0dJ7pr5bIf4lPpHvAtP2ywpTNgs7hqw=="
@@ -668,6 +712,11 @@
   "version" "1.0.3"
   dependencies:
     "function-bind" "^1.1.1"
+
+"hexoid@^1.0.0":
+  "integrity" "sha512-QFLV0taWQOZtvIRIAdBChesmogZrtuXvVWsFHZTk2SU+anspqZ2vMnoLg7IE1+Uk16N19APic1BuF8bC8c2m5g=="
+  "resolved" "https://registry.npmjs.org/hexoid/-/hexoid-1.0.0.tgz"
+  "version" "1.0.0"
 
 "http-errors@^1.8.0":
   "integrity" "sha512-Kpk9Sm7NmI+RHhnj6OIWDI1d6fIoFAtFt9RLaTMRlg/8w49juAStsrBgp0Dp4OdxdVbRIeKhtCUvoi/RuAhO4g=="
@@ -894,7 +943,7 @@
   "resolved" "https://registry.npmjs.org/object-inspect/-/object-inspect-1.12.0.tgz"
   "version" "1.12.0"
 
-"once@^1.3.0":
+"once@^1.3.0", "once@^1.4.0":
   "integrity" "sha1-WDsap3WWHUsROsF9nFC6753Xa9E="
   "resolved" "https://registry.npmjs.org/once/-/once-1.4.0.tgz"
   "version" "1.4.0"
@@ -1201,6 +1250,16 @@
   "integrity" "sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow="
   "resolved" "https://registry.npmjs.org/statuses/-/statuses-1.5.0.tgz"
   "version" "1.5.0"
+
+"stream-wormhole@^1.1.0":
+  "integrity" "sha512-gHFfL3px0Kctd6Po0M8TzEvt3De/xu6cnRrjlfYNhwbhLPLwigI2t1nc6jrzNuaYg5C4YF78PPFuQPzRiqn9ew=="
+  "resolved" "https://registry.npmjs.org/stream-wormhole/-/stream-wormhole-1.1.0.tgz"
+  "version" "1.1.0"
+
+"streamsearch@0.1.2":
+  "integrity" "sha1-gIudDlb8Jz2Am6VzOOkpkZoanxo="
+  "resolved" "https://registry.npmjs.org/streamsearch/-/streamsearch-0.1.2.tgz"
+  "version" "0.1.2"
 
 "string_decoder@~1.1.1":
   "integrity" "sha512-n/ShnvDi6FHbbVfviro+WojiFzv+s8MPMHBczVePfUpDJLwoLT0ht1l4YwBCbi8pJAveEEdnkHyPyTP/mzRfwg=="
