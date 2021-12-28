@@ -1,33 +1,45 @@
-const express = require("express")
-require("express-async-errors")
-
 // Load configuration
-const Config = require("./src/config")
+const Config = require("./config");
+
+// Load fastify server
+const fastify = require("fastify")({
+  logger: Config.logger,
+  ajv: {
+    customOptions: {
+      coerceTypes: "array",
+    },
+  },
+});
+
+// Load mongoose ODM
+const mongoose = require("mongoose");
+
+// remove deprecation warnings when using Model.findOneAndX()
+mongoose.set("useFindAndModify", false);
 
 // Connect database
-require("mongoose").connect(Config.mongodb.uri, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-})
+mongoose.connect(process.env["MONGODB_PATH"] || Config.mongodb.uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-// Start up api
-const app = express()
-app.use(require("cors")({ maxAge: 30 * 60 }))
-app.use(require("morgan")("short"))
-app.use(express.json({ strict: false}))
-app.use(
-	express.urlencoded({ extended: false})
-)
+// Register plugins
+fastify.register(require("fastify-formbody"), {
+  bodyLimit: Config.http.entityMaxSize,
+});
 
-app.use("/", require("./src/endpoints/tunes"))
-app.use("/", function (req, res) {
-	res.status(404).json({
-		code: "INVALID_ENDPOINT",
-		message: "Invalid Request: no handler at this path",
-		path: req.baseUrl + req.path,
-	})
-})
+// Register CORS middlewares
+fastify.register(require("fastify-cors"), {
+  maxAge: 30 * 60,
+});
 
-app.listen(Config.listen.port, Config.listen.host)
+// Register routes
+fastify.register(require("./src/endpoints/tunes"), { prefix: "/v1" });
 
-console.log("Server ready and listening")
+// Start up server
+fastify.listen(Config.listen.port, Config.listen.host, function (err, address) {
+  if (err) {
+    fastify.log.error(err);
+    process.exit(1);
+  }
+});

@@ -1,64 +1,148 @@
-const router = require('express').Router();
-const Tune = require('../models/tune');
+const Tune = require("../models/tune");
+const TuneSchema = require("../schemas/tune");
+const Errors = require("../errors");
 
-router.get('/tunes/all', async function (req, res, next) {
-	const tunes = await Tune.find();
-	return res.json(tunes);
-});
+async function routes(fastify, options) {
+  fastify.route({
+    method: "GET",
+    url: "/tunes/all",
+    schema: {
+      description: "Get all tunes",
+      response: {
+        200: { type: "array", items: TuneSchema.serialization.tune },
+      },
+    },
+    handler: getAllTunes,
+  });
 
-router.get('/tunes/:tune_id', async function (req, res, next) {
-	const tune = await Tune.findById(req.params.tune_id);
-	return res.json(tune);
-});
+  fastify.route({
+    method: "GET",
+    url: "/tunes/:tuneId",
+    schema: {
+      description: "Get a tune by ID",
+      response: {
+        200: TuneSchema.serialization.tune,
+      },
+    },
+    handler: getTuneById,
+  });
 
-router.get('/tunes', async function (req, res, next) {
-	let regex = '';
-	if (req.query.search_terms) {
-		let search_terms = [req.query.search_terms];
-		if (req.query.search_terms.includes(' '))
-			search_terms = search_terms.concat(req.query.search_terms.split(' '));
-		regex = new RegExp(search_terms.join('|'));
-	}
+  fastify.route({
+    method: "GET",
+    url: "/tunes",
+    schema: {
+      description: "Get tunes with filters",
+      querystring: {
+        searchTerms: {
+          type: "string",
+        },
+        limit: {
+          type: "integer",
+          minimum: 1,
+        },
+        skip: {
+          type: "integer",
+          minimum: 0,
+        },
+      },
+      response: {
+        200: { type: "array", items: TuneSchema.serialization.tune },
+      },
+    },
+    handler: getTunes,
+  });
 
-	if (!req.query.limit) req.query.limit = 50;
-	else req.query.limit = Math.min(req.query.limit, 250);
+  fastify.route({
+    method: "POST",
+    url: "/tunes",
+    schema: {
+      description: "Create a new tune",
+      body: TuneSchema.validation.createTune,
+      response: {
+        200: TuneSchema.serialization.tune,
+      },
+    },
+    handler: createTune,
+  });
 
-	const tunes = await Tune.find({
-		$or: [
-			{ title: { $regex: regex, $options: 'i' } },
-			{ type: { $regex: regex, $options: 'i' } },
-			{ abc: { $regex: regex, $options: 'i' } },
-			{ key: { $regex: regex, $options: 'i' } },
-			{ composer: { $regex: regex, $options: 'i' } },
-		],
-	})
-		.skip(parseInt(req.query.skip))
-		.limit(parseInt(req.query.limit));
+  fastify.route({
+    method: "PATCH",
+    url: "/tunes/:tuneId",
+    schema: {
+      description: "Patch a tune by ID",
+      body: TuneSchema.validation.createTune,
+      response: {
+        200: TuneSchema.serialization.tune,
+      },
+    },
+    handler: patchTuneById,
+  });
 
-	return res.json(tunes);
-});
+  fastify.route({
+    method: "DELETE",
+    url: "/tunes/:tuneId",
+    schema: {
+      description: "Delete a tune by ID",
+      response: {
+        204: {},
+      },
+    },
+    handler: deleteTuneById,
+  });
+}
 
-router.post('/tunes', async function (req, res, next) {
-	const tune = new Tune(req.body);
-	await tune.save();
-	return res.json(tune);
-});
+const getAllTunes = async function (req, res) {
+  return await Tune.find();
+};
 
-router.patch('/tunes/:tune_id', async function (req, res, next) {
-	await Tune.updateOne(
-		{ _id: req.params.tune_id },
-		{
-			$set: {
-				...req.body,
-			},
-		},
-	);
-	return res.json(await Tune.findById(req.params.tune_id));
-});
+const getTuneById = async function (req, res) {
+  return await await Tune.findById(req.params.tuneId);
+};
 
-router.delete('/tunes/:tune_id', async function (req, res, next) {
-	await Tune.deleteOne({ _id: req.params.tune_id });
-	res.status(204).end();
-});
+const getTunes = async function (req, res) {
+  let regex = "";
+  if (req.query.searchTerms) {
+    let searchTerms = [req.query.searchTerms];
+    if (req.query.searchTerms.includes(" "))
+      searchTerms = searchTerms.concat(req.query.searchTerms.split(" "));
+    regex = new RegExp(searchTerms.join("|"));
+  }
 
-module.exports = router;
+  if (!req.query.limit) req.query.limit = 50;
+  else req.query.limit = Math.min(req.query.limit, 250);
+
+  return await Tune.find({
+    $or: [
+      { title: { $regex: regex, $options: "i" } },
+      { type: { $regex: regex, $options: "i" } },
+      { abc: { $regex: regex, $options: "i" } },
+      { key: { $regex: regex, $options: "i" } },
+      { composer: { $regex: regex, $options: "i" } },
+    ],
+  })
+    .skip(parseInt(req.query.skip))
+    .limit(parseInt(req.query.limit));
+};
+
+const createTune = async function (req, res) {
+  const tune = new Tune(req.body);
+  return await tune.save();
+};
+
+const patchTuneById = async function (req, res) {
+  const tune = await findOneAndUpdate({ _id: req.params.tuneId }, req.body, {
+    new: true,
+  });
+  if (!tune) throw Errors.TuneNotFound;
+  return tune;
+};
+
+const deleteTuneById = async function (req, res) {
+  const { deletedCount } = await Tune.deleteOne({
+    _id: req.params.tuneId,
+  });
+  if (deletedCount !== 1) throw Errors.TuneNotFound;
+  res.code(204).send();
+};
+
+module.exports = routes;

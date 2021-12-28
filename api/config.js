@@ -3,14 +3,18 @@
  * configuration options that can be tweaked.
  */
 module.exports = {
-	// clientUrl: "https://www.saig.org",
+  // clientUrl: "https://www.saig.org",
 
-	mongodb: {
-		uri: "mongodb://tunebook-db/tunebook",
-	},
+  mongodb: {
+    uri: "mongodb://tunebook-db/tunebook",
+  },
 
-	listen: {
-		port: 3000,
-		host: "::"
-	},
-}
+  listen: {
+    port: 3000,
+    host: "::",
+  },
+  logger: true,
+  http: {
+    entityMaxSize: 16 * 1024 * 1024, // 16MB
+  },
+};
